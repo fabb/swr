@@ -3,6 +3,7 @@ import Link from 'next/link'
 import fetch from '../../libs/fetch'
 
 import useSWR from 'swr'
+import { GetStaticProps } from 'next'
 
 export default () => {
   const id =
@@ -32,4 +33,20 @@ export default () => {
       </Link>
     </div>
   )
+}
+
+export const getStaticProps: GetStaticProps<{}> = async () => {
+  return { props: {} }
+}
+
+export async function getStaticPaths() {
+  return {
+    paths: [
+      { params: { user: 'facebook', repo: 'flipper' } },
+      { params: { user: 'vuejs', repo: 'vuepress' } },
+      { params: { user: 'rust-lang', repo: 'rust' } },
+      { params: { user: 'zeit', repo: 'next.js' } },
+    ],
+    fallback: false,
+  }
 }
